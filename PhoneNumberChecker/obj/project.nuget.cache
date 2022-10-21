@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "8ODseXScHYT1UIzHz6ce0GL3rR1E175gzj5zKBpy3ZWdzR1Tvh3FddxN9Sx0p7srXOzRqU1W2gKSYUAqtLGdjQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\jackx\\Work\\cornucopia\\PhoneNumberChecker\\PhoneNumberChecker\\PhoneNumberChecker.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jackx\\.nuget\\packages\\libphonenumber-csharp\\8.12.57\\libphonenumber-csharp.8.12.57.nupkg.sha512",
+    "C:\\Users\\jackx\\.nuget\\packages\\system.collections.immutable\\1.7.1\\system.collections.immutable.1.7.1.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,69 @@
+﻿@model PhoneNumberChecker.Models.PhoneNumberCheckViewModel
+
+@{ ViewData["Title"] = "Verify"; }
+
+<h2>Phone Number Checker</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-5">
+        <form asp-action="Verify">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CountryCodeSelected" class="control-label"></label>
+                <select asp-for="CountryCodeSelected" id="Country" class="form-control" autofocus="autofocus">
+                    <option>-- select a country --</option>
+                    <option>AU</option>
+                    <option>US</option>
+                    <option>CH</option>
+                </select>
+                <span asp-validation-for="CountryCodeSelected" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Verify" class="btn btn-default" />
+            </div>
+
+            <br />
+            <h2>Results</h2>
+            <hr />
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsValid" /> @Html.DisplayNameFor(model => model.IsValid)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsPossible" /> @Html.DisplayNameFor(model => model.IsPossible)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneType" class="control-label"></label>
+                <input asp-for="PhoneType" class="form-control" readonly="readonly" />
+                <span asp-validation-for="PhoneType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InternationalFormat" class="control-label"></label>
+                <input asp-for="InternationalFormat" class="form-control" readonly="readonly" />
+                <span asp-validation-for="InternationalFormat" class="text-danger"></span>
+            </div>
+        </form>
+        <form asp-action="DownloadCSV">
+            <div class="form-group">
+                <input type="submit" value="Download CSV" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
