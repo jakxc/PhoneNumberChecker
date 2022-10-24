@@ -11,11 +11,11 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="CountryCodeSelected" class="control-label"></label>
-                <select asp-for="CountryCodeSelected" id="Country" class="form-control" autofocus="autofocus">
+                <select asp-for="CountryCodeSelected" id="Country" asp-items="@Model.Countries" class="form-control" autofocus="autofocus">
                     <option>-- select a country --</option>
                     <option>AU</option>
                     <option>US</option>
-                    <option>CH</option>
+                    <option>TW</option>
                 </select>
                 <span asp-validation-for="CountryCodeSelected" class="text-danger"></span>
             </div>

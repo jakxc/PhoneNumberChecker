@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using PhoneNumberChecker.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using PhoneNumbers;
 using System.Data;
 
@@ -12,17 +14,28 @@ namespace PhoneNumberChecker.Controllers
         private static PhoneNumberUtil phoneUtil;
         private PhoneNumber phoneNumber;
         private string countryCodeSeleted;
+        private DataTable dataTable;
+        private List<SelectListItem> countries;
 
         public PhoneController()
         {
             phoneUtil = PhoneNumberUtil.GetInstance();
+            dataTable = new DataTable();
+
+            countries = new List<SelectListItem>()
+                {
+                    new SelectListItem{Text="AU"},
+                    new SelectListItem{Text="US"},
+                    new SelectListItem{Text="TW"}
+                };
         }
 
         public IActionResult Verify()
         {
             var model = new PhoneNumberCheckViewModel()
             {
-                CountryCodeSelected = "AU"
+                CountryCodeSelected = "AU",
+                Countries = countries
             };
             return View(model);
         }
@@ -66,16 +79,19 @@ namespace PhoneNumberChecker.Controllers
                     ModelState.AddModelError(npex.ErrorType.ToString(), npex.Message);
                 }
             }
+
+            model.Countries = countries;
+
             return View(model);
         }
 
         public ActionResult DownloadCSV()
         {
-            DataTable dataTable = CsvCreator.CreateDataTable(
-                 phoneUtil.IsValidNumberForRegion(phoneNumber, countryCodeSeleted),
-                 phoneUtil.IsPossibleNumber(phoneNumber),
-                 phoneUtil.GetNumberType(phoneNumber).ToString(),
-                 phoneUtil.Format(phoneNumber, PhoneNumberFormat.INTERNATIONAL)
+            dataTable = CsvCreator.CreateDataTable(
+                       phoneUtil.IsValidNumberForRegion(phoneNumber, countryCodeSeleted),
+                       phoneUtil.IsPossibleNumber(phoneNumber),
+                       phoneUtil.GetNumberType(phoneNumber).ToString(),
+                       phoneUtil.Format(phoneNumber, PhoneNumberFormat.INTERNATIONAL)
              );
 
             string filePath = "PhoneNumberChecker" + DateTime.Today.ToString("yyyy-MM-dd") + ".csv";

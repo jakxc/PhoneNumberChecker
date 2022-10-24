@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace PhoneNumberChecker.Models
 {
@@ -29,5 +31,7 @@ namespace PhoneNumberChecker.Models
 
         [Display(Name = "International Format")]
         public string InternationalFormat { get; set; }
+
+        public List<SelectListItem> Countries { get; set; }
     }
 }
